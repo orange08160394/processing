@@ -1,3 +1,70 @@
+/*void setup(){
+  size(500,500);  
+}
+void draw(){
+  if(mousePressed) background(155,50,50);
+  else background(150,100,150);
+}*/
+/*void setup(){
+  size(500,500);
+  fill(155,50,50); rect(0,0,100,100);//深红色
+  fill(100,255,100); rect(0,100,100,100);//綠色
+  fill(106,90,205); rect(0,200,100,100);//淺紫色
+}
+void draw(){
+  if(mousePressed){
+    if(mouseX<100){
+      if(mouseY<100) stroke(155,50,50);//红色
+      else if(mouseY<200) stroke(100,255,100);//綠色
+      else if(mouseY<300) stroke(106,90,205);//橘色 
+    }
+    else line(mouseX,mouseY,pmouseX,pmouseY);
+  }
+}*/
+
+/*void setup(){
+  size(500,500);
+  rect(0,0,100,100); ellipse(50,50,10,10);//10號筆
+  rect(0,100,100,100); ellipse(50,150,5,5);//5號筆
+}
+
+void draw(){
+  if(mousePressed){
+    if(mouseX<100){
+      if(mouseY<100) strokeWeight(10);//將筆觸改為10
+      else if(mouseY<200) strokeWeight(5);//將筆觸改為5
+    }else line(mouseX,mouseY,pmouseX,pmouseY);
+  }
+}*/
+/*void setup(){
+  size(500,500);
+  for(int i=1;i<10;i+=2){
+    rect(0,i*50,50,50);
+    ellipse(25,25+i*50,i,i);//自動產生5個不同大小的筆觸
+  }
+  fill(155,50,50); rect(400,0,100,100);//深红色
+  fill(100,255,100); rect(400,100,100,100);//綠色
+  fill(106,90,205); rect(400,200,100,100);//淺紫色
+}
+void draw(){
+  if(mousePressed){
+    if(mousePressed){
+    if(mouseX>400){
+      if(mouseY<100) stroke(155,50,50);//红色
+      else if(mouseY<200) stroke(100,255,100);//綠色
+      else if(mouseY<300) stroke(106,90,205);//橘色 
+    }
+    else line(mouseX,mouseY,pmouseX,pmouseY);
+  }
+    if(mouseX<50){
+      for(int i=1;i<10;i+=2){
+        if(mouseY>i*50 && mouseY<i*50+50){
+          strokeWeight(i);
+        }
+      }
+    }else line(mouseX,mouseY,pmouseX,pmouseY);
+  }
+}*/
 void setup(){
   size(500,500);
   for(int i=1;i<10;i++){
