@@ -1,0 +1,24 @@
+PImage img,img1;
+void setup(){
+size(1000,600);
+//img=loadImage("http://c.files.bbci.co.uk/101E9/production/_104852066_gettyimages-860189480.jpg");
+img=loadImage("deer.jpg");
+img1=loadImage("bily.png");
+
+}
+void draw(){
+imageMode(CORNER);
+image(img,0,0,1000,600);
+imageMode(CENTER);
+image(img1,mouseX,mouseY,200,200);
+/
+import ddf.minim.;
+Minim minim;
+AudioPlayer player;
+void setup(){
+size(500,500,P3D);
+minim=new Minim(this);
+player=minim.loadFile("groove.mp3");
+player.play();
+}
+
