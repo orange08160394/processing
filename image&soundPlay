@@ -1,3 +1,4 @@
+/*
 PImage img,img1;
 void setup(){
 size(1000,600);
@@ -11,7 +12,8 @@ imageMode(CORNER);
 image(img,0,0,1000,600);
 imageMode(CENTER);
 image(img1,mouseX,mouseY,200,200);
-/
+*/
+/*
 import ddf.minim.;
 Minim minim;
 AudioPlayer player;
@@ -20,5 +22,41 @@ size(500,500,P3D);
 minim=new Minim(this);
 player=minim.loadFile("groove.mp3");
 player.play();
+}*/
+import ddf.minim.*;
+Minim minim;
+AudioPlayer player,player2;
+void setup(){
+  size(500,500);
+  minim=new Minim(this);
+  player=minim.loadFile("groove.mp3");
+  player2=minim.loadFile("lalala.mp3");////讀音檔
+  player2.play();///播放音檔
+}
+void draw(){
 }
 
+/*
+//panio
+import ddf.minim.*;
+Minim minim;
+AudioPlayer doo,re,mi,fa,so;
+void setup(){
+  size(500,100);
+  minim=new Minim(this);
+  doo=minim.loadFile("do.wav");
+  re=minim.loadFile("re.wav");
+  mi=minim.loadFile("mi.wav");
+  fa=minim.loadFile("fa.wav");
+  so=minim.loadFile("so.wav");
+}
+void keyPressed(){
+  if(key=='1'){doo.rewind(); doo.play();}
+  if(key=='2'){re.rewind(); re.play();}
+  if(key=='3'){mi.rewind(); mi.play();}
+  if(key=='4'){fa.rewind(); fa.play();}
+  if(key=='5'){so.rewind(); so.play();}
+}
+void draw(){
+}
+*/
