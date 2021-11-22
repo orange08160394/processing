@@ -1,0 +1,268 @@
+/*float x=250,y=0,vx=0,vy=3;// (座標x,y)
+void setup(){
+  size(500,600);
+}
+void draw(){
+  background(255);
+  ellipse(x,y,50,50);
+  y=y+vy; //vy是速度
+
+}
+//不只一個在動
+float x=250,y=0,vx=0,vy=3;
+float x2=150,y2=50,vx2=0,vy2=2;
+void setup(){
+  size(500,600);
+}
+void draw(){
+  background(255);
+  ellipse(x,y,50,50);
+  ellipse(x2,y2,50,50);
+  y=y+vy; //vy是速度
+  y2=y2+vy2; //vy2是速度
+}
+
+float []x={250,150,350,350};
+float []y={0,50,80,100};
+float []vx={0,0,0,0};
+float []vy={3,2,2.5,4};
+void setup(){
+  size(500,600);
+}
+void draw(){
+  background(255);
+  for(int i=0;i<4;i++){
+    ellipse(x[i],y[i],50,50);
+    y[i]=y[i]+vy[i];//vy是速度
+    if(y[i]>600)vy[i]=-vy[i];//撞到下方
+    if(y[i]<0)vy[i]=-vy[i];//撞到上方
+  }
+}
+//mouse碰到球，可以得分
+float[] x={250,150,350,300};
+float[] y={0,150,80,100};
+float[] vx={0,0,0,0};
+float[] vy={3,2,2.5,4};
+void setup(){
+  size(500,600);
+}
+void draw(){
+  background(255);
+  for(int i=0;i<4;i++){
+    fill(255,255,0);ellipse(x[i],y[i],50,50);
+    if(dist(mouseX,mouseY,x[i],y[i])<=50){
+      continue;
+    }
+    y[i]=y[i]+vy[i]; //vy[i]是速度
+    if(y[i]>600) vy[i] = -vy[i]; //撞到下方
+    if(y[i]<0) vy[i] = -vy[i]; //撞到上方
+  }
+  fill(255,0,0);ellipse(mouseX,mouseY,50,50);
+}
+float[] x={250,150,350,300};
+float[] y={0,150,80,100};
+float[] vx={0,0,0,0};
+float[] vy={3,2,2.5,4};
+boolean[] dead={false,false,false,false};
+void setup(){
+  size(500,600);
+}
+void draw(){
+  background(255);
+  for(int i=0;i<4;i++){
+    if(dist(mouseX,mouseY,x[i],y[i])<=50){
+      dead[i]=true; //碰到就死掉
+    }
+    if(dead[i]==true) continue; //如果死了，換下一個
+    fill(255,255,0);ellipse(x[i],y[i],50,50);
+    y[i]=y[i]+vy[i];
+    if(y[i]>600) vy[i] = -vy[i]; 
+    if(y[i]<0) vy[i] = -vy[i]; 
+  }
+  fill(255,0,0);ellipse(mouseX,mouseY,50,50);
+}
+float[] x;
+float[] y;
+float[] vy;
+boolean[] dead;
+int N=20;
+void setup(){
+  size(500,600);
+  x=new float[N]; //決定陣列大小
+  y=new float[N];
+  vy=new float[N];
+  dead=new boolean[N];
+  for(int i=0;i<N;i++){
+    x[i]=random(500); //500以下的亂數
+    y[i]=100;
+    vy[i]=random(2,4);
+    dead[i]=false;
+    }
+}
+void draw(){
+  background(255);
+  for(int i=0;i<N;i++){
+    if(dist(mouseX,mouseY,x[i],y[i])<=50){
+      dead[i]=true; //碰到就死掉
+    }
+    if(dead[i]==true) continue; //如果死了，換下一個
+    fill(255,255,0);ellipse(x[i],y[i],50,50);
+    y[i]=y[i]+vy[i]; 
+    if(y[i]>600) vy[i] = -vy[i];
+    if(y[i]<0) vy[i] = -vy[i]; 
+  }
+  fill(255,0,0);ellipse(mouseX,mouseY,50,50);
+}
+//用class物件
+class Ball{ //發明Ball物件
+  float x,y,vx,vy;
+  boolean dead;
+  Ball(){ //建構 同名的東西
+    x = random(500);
+    y = random(100,200);
+    vy = random(3,4);
+    dead = false; //沒有死掉
+  }
+  void draw(){
+    if(dead==true) return;
+    ellipse(x,y,50,50);
+    if(dist(mouseX,mouseY,x,y)<50){
+      dead=true;
+    }
+    y = y+vy;
+    if(y>500) vy = -vy;
+    if(y<0) vy = -vy;
+  }
+}
+Ball[] balls;
+void setup(){
+  size(500,500);
+  balls = new Ball[20];
+  for(int i=0;i<20;i++){
+    balls[i]=new Ball();
+  }
+}
+void draw(){
+  background(255);
+  for(int i=0;i<20;i++){
+    balls[i].draw();
+  }
+}
+class Ball{
+  float x,y,vx,vy;
+  boolean dead;
+  Ball(){
+    x = random(500);
+    y = random(500);
+    vy = random(-4,4);
+    vx = random(-4,4);
+    dead = false;
+  }
+  void draw(){
+    if(dead==true) return;
+    ellipse(x,y,50,50);
+    if(dist(mouseX,mouseY,x,y)<50){
+      dead=true;
+    }
+    x = x + vx;
+    y = y + vy;
+    if(y>500||y<0) vy = -vy;
+    if(x>500||x<0) vy = -vy;
+  }
+}
+Ball []balls;
+void setup(){
+  size(500,500);
+  balls = new Ball[20];
+  for(int i=0;i<20;i++){
+    balls[i]=new Ball();
+  }
+}
+void draw(){
+  background(255);
+  for(int i=0;i<20;i++){
+    balls[i].draw();
+  }
+}
+class Ball{
+  float x,y,vx,vy;
+  boolean dead;
+  Ball(){
+    x = random(500);
+    y = random(500);
+    vy = random(-4,4);
+    vx = random(-4,4);
+    dead = false;
+  }
+  void draw(){
+    if(dead==true) return;
+    ellipse(x,y,50,50);
+    if(dist(mouseX,mouseY,x,y)<50){
+      dead=true;
+    }
+    x = x + vx;
+    y = y + vy;
+    vy += 0.98;
+    if(y>500||y<0) vy = -vy;
+    if(x>500||x<0) vy = -vy;
+  }
+}
+Ball []balls;
+void setup(){
+  size(500,500);
+  balls = new Ball[20];
+  for(int i=0;i<20;i++){
+    balls[i]=new Ball();
+  }
+}
+void draw(){
+  background(255);
+  for(int i=0;i<20;i++){
+    balls[i].draw();
+  }
+}*/
+
+//發射子彈，玩家碰到子彈就結束遊戲(變成紅色的畫面)
+
+class Ball{//我們發明 Ball物件
+  float x, y, vx, vy;
+  boolean dead;
+  Ball(){//建構 同名的東西
+    reborn();
+  }
+  void reborn(){
+    x = random(500);
+    y = random(500);
+    vy = random(-2,2);
+    vx = random(-2,2);
+    dead = false;//沒有死掉
+  }
+  void draw(){
+    if(dead==true) return;
+    fill(255,0,0); ellipse(x,y, 5,5);
+    if( dist(mouseX,mouseY,x,y)<5 ){
+      dead=true;
+      gameOver=true;
+    }
+    x = x + vx*1;//速度*時間=距離
+    y = y + vy*1;
+    if(y>500 || y<0) reborn();
+    if(x>500 || x<0) reborn();
+  }
+}
+Ball [] balls;
+void setup(){
+  size(500,500);
+  balls = new Ball[99];
+  for(int i=0; i<99; i++){
+    balls[i] = new Ball();
+  }
+}
+boolean gameOver=false;
+void draw(){
+  background(0);
+  for(int i=0; i<99; i++){
+    balls[i].draw();
+  }
+  if(gameOver) background(100,180,180);//變色
+}
