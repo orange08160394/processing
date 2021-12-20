@@ -1,0 +1,92 @@
+PImage log;
+PImage leftB;
+PImage rightB;
+PImage bg;
+PImage leftM;
+PImage rightM;
+PImage menu;
+PFont timberman;
+float seconds = 5;
+float actualMillis = 3;
+int[]tree=new int[30];//0:no,1:left,2:right
+int pos=0;//0:left,1:right
+int score=0;
+int topscore=0;
+boolean stop=false;
+boolean gameOver=false; 
+void setup(){
+  size(300,600);
+  log = loadImage("log.png");
+  leftB = loadImage("leftB.png");
+  rightB = loadImage("rightB.png");
+  bg = loadImage("bg.png");
+  leftM = loadImage("leftM.png");
+  rightM = loadImage("rightM.png");
+  menu = loadImage("menu.png");
+  tree[0]=0;//safe
+  for(int i=1;i<30;i++){
+    tree[i]=int(random(3));
+  }
+}
+void draw(){
+  if(!stop){
+  clear();
+  image(bg,0,0);
+  for(int i=0;i<30;i++){
+    if(tree[i]==0){image(log,100,500-i*100,100,100);}
+    else if(tree[i]==1){image(leftB,0,500-i*100,200,100);
+  }
+    else if(tree[i]==2){image(rightB,100,500-i*100,200,100);}
+  }
+  if(pos==0){image(rightM,0,475);}
+  else if(pos==1){image(leftM,200,475);}
+  showSeconds(millis()/1000 - actualMillis);
+  if (millis()/1000 - actualMillis >= seconds) {die();}
+  }
+}
+void keyPressed(){
+  if(!stop){
+    if(keyCode==RIGHT){pos=1;checkAndUP();}
+    if(keyCode==LEFT){pos=0;checkAndUP();}
+  }
+  if(keyCode==UP){reset();}
+}
+void checkAndUP(){
+  if(tree[1]==1&&pos==0)die();
+  else if(tree[1]==2&&pos==1)die();
+  else {
+    score++;
+    if ((seconds + 0.25) - (millis()/1000 - actualMillis) <= 14){ seconds += 0.25;}
+    for(int i=0;i<30-1;i++){
+      tree[i]=tree[i+1];
+    }
+    tree[29]=int(random(3));
+  }
+}
+void showSeconds(float s) {
+  float time = map(seconds - s, 0, 14, 0, 140);
+  textAlign(CENTER);
+  timberman = createFont("timberman.ttf", 30);
+  textFont(timberman);
+  fill(255,255,255);text("TIME",150,35); 
+  fill(255,140,105);rect(width/2 - 70 + time/2, 40, time, 20);
+}
+void die(){
+  gameOver=true;
+  image(menu,0,0);
+  if (score > topscore) { topscore = score;}
+  //textSize(25);
+  textAlign(CENTER);
+  timberman = createFont("timberman.ttf", 30);
+  textFont(timberman);
+  fill(255,255,255);text(topscore,150, 310); 
+  fill(255,255,255);text(score,150, 385); 
+  stop = true;
+}
+void reset(){
+    stop = false;
+    actualMillis = millis()/1000;
+    seconds = 7;
+    score=0;
+    return;
+}
